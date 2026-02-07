@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #ffb6c1, #ffc0cb);
+      font-family: 'Poppins', Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 35px 20px;
+      border-radius: 26px;
+      text-align: center;
+      width: 330px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 10px 0 25px;
+      color: #333;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 26px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #ff2f92;
+      color: white;
+    }
+
+    .no {
+      background: #eee;
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 24px;
+      animation: explode 2s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0) translate(0,0); opacity: 1; }
+      100% { transform: scale(1.5) translate(var(--x), var(--y)); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Sanaa !💗<br>Will you be my Valentine?</h1>
+
+    <div class="buttons">
+      <button class="yes" onclick="yesClick()">Yes</button>
+      <button class="no" id="noBtn">No</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    function yesClick() {
+      for (let i = 0; i < 40; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💖";
+        heart.style.left = "50%";
+        heart.style.top = "50%";
+        heart.style.setProperty("--x", `${Math.random()*600-300}px`);
+        heart.style.setProperty("--y", `${Math.random()*600-300}px`);
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+      }
+
+      setTimeout(() => {
+        document.body.innerHTML = `
+          <div style="
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            height:100vh;
+            background: linear-gradient(180deg, #ffb6c1, #ffc0cb);
+            text-align:center;
+          ">
+            <h1 style="font-size:28px;color:white;">
+              Yay!! 💕<br>
+              Yours forever,<br>
+              <span style="color:#ff2f92;background:white;padding:8px 18px;border-radius:24px;display:inline-block;margin-top:12px;">
+                Nitheer Ahamed!💗
+              </span>
+            </h1>
+          </div>
+        `;
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
